@@ -1,10 +1,10 @@
 <template>
-<div class="min-h-screen bg-black text-white">
+  <div class="min-h-screen bg-black text-white">
 
     <!-- Side Menu -->
     <div class="hidden lg:block fixed right-8 top-1/2 -translate-y-1/2 z-50">
       <div class="flex flex-col gap-4">
-        <a v-for="item in menuItems" :key="item.name" :href="item.href"
+        <button v-for="item in menuItems" :key="item.name" @click="scrollTo(item.id)"
           class="group relative flex items-center" :title="item.name">
           <div class="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center border border-zinc-700 hover:border-white hover:bg-zinc-800 transition-all duration-300 text-base">
             {{ item.icon }}
@@ -12,7 +12,7 @@
           <span class="absolute right-14 bg-zinc-900 border border-zinc-700 px-3 py-1 rounded text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
             {{ item.name }}
           </span>
-        </a>
+        </button>
       </div>
     </div>
 
@@ -24,10 +24,10 @@
             ABDOU ISAAC
           </div>
           <div class="hidden md:flex space-x-8">
-            <a v-for="item in navItems" :key="item"
-              :href="`#${item.toLowerCase().replace(' ', '-').replace('à', 'a')}`"
-              class="text-zinc-400 hover:text-white transition-colors duration-200 text-sm tracking-wide uppercase">
-              {{ item }}
+            <a v-for="item in navItems" :key="item.name"
+              @click.prevent="scrollTo(item.id)"
+              class="text-zinc-400 hover:text-white transition-colors duration-200 text-sm tracking-wide uppercase cursor-pointer">
+              {{ item.name }}
             </a>
           </div>
           <button class="md:hidden" @click="isMenuOpen = !isMenuOpen">
@@ -40,11 +40,10 @@
       </div>
       <div v-if="isMenuOpen" class="md:hidden bg-black border-t border-zinc-800">
         <div class="px-4 py-3 space-y-2">
-          <a v-for="item in navItems" :key="item"
-            :href="`#${item.toLowerCase().replace(' ', '-').replace('à', 'a')}`"
-            class="block py-2 text-zinc-400 hover:text-white text-sm uppercase tracking-wide"
-            @click="isMenuOpen = false">
-            {{ item }}
+          <a v-for="item in navItems" :key="item.name"
+            @click.prevent="scrollTo(item.id); isMenuOpen = false"
+            class="block py-2 text-zinc-400 hover:text-white text-sm uppercase tracking-wide cursor-pointer">
+            {{ item.name }}
           </a>
         </div>
       </div>
@@ -65,10 +64,10 @@
         <p class="text-zinc-600 text-sm mb-10 animate-fade-in-delay-2">
           Développeur passionné · Solutions Logicielles et Applications Métier
         </p>
-        <a href="#projets"
+        <button @click="scrollTo('projets')"
           class="border border-white px-8 py-3 text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 animate-fade-in-delay-3">
           Voir mes projets
-        </a>
+        </button>
       </div>
     </section>
 
@@ -80,7 +79,7 @@
         <div class="grid md:grid-cols-2 gap-16 items-start">
           <div class="space-y-6">
             <p class="text-zinc-300 leading-relaxed text-lg">
-              Salut, moi c'est <span class="text-white font-semibold">Abdou Isaac</span> 👋
+              Salut, moi c'est <span class="text-white font-semibold">Abdou Isaac</span> 
             </p>
             <p class="text-zinc-400 leading-relaxed">
               Je suis actuellement étudiant en <span class="text-white font-semibold">BTS SIO</span> dans l'option <span class="text-white font-semibold">SLAM</span> (Solutions Logicielles et Applications Métier).
@@ -94,13 +93,13 @@
             </a>
           </div>
           <div class="border border-zinc-800 rounded-lg p-8 bg-zinc-950">
-            <h3 class="text-xl font-semibold mb-6 text-white">Qu'est-ce que le BTS SIO ? 🎓</h3>
+            <h3 class="text-xl font-semibold mb-6 text-white">Qu'est-ce que le BTS SIO ? </h3>
             <p class="text-zinc-400 mb-6 text-sm leading-relaxed">
               Le BTS SIO forme en deux ans aux métiers de l'informatique avec deux spécialités :
             </p>
             <div class="space-y-4">
               <div class="border-l-2 border-white pl-4">
-                <h4 class="font-semibold text-white mb-1">Option SLAM 👈 (ma filière)</h4>
+                <h4 class="font-semibold text-white mb-1">Option SLAM  (ma filière)</h4>
                 <p class="text-sm text-zinc-500">Solutions Logicielles et Applications Métier</p>
               </div>
               <div class="border-l-2 border-zinc-700 pl-4">
@@ -120,12 +119,12 @@
         <h2 class="text-4xl md:text-5xl font-bold mb-16 text-white">Mon Parcours</h2>
 
         <div class="mb-16">
-          <h3 class="text-xs font-semibold mb-8 text-zinc-500 uppercase tracking-widest">Expériences Professionnelles 💼</h3>
+          <h3 class="text-xs font-semibold mb-8 text-zinc-500 uppercase tracking-widest">Expériences Professionnelles </h3>
           <div class="space-y-6">
             <div class="border border-zinc-800 rounded-lg p-6 bg-black hover:border-zinc-600 transition-all duration-300">
               <div class="flex justify-between items-start mb-4 flex-wrap gap-4">
                 <div>
-                  <h4 class="text-lg font-semibold text-white">Stage 2ème année — Erasmus 🌍</h4>
+                  <h4 class="text-lg font-semibold text-white">Stage 2ème année — Erasmus </h4>
                   <p class="text-zinc-500 text-sm">MastxSoftware · Pays-Bas</p>
                 </div>
                 <span class="border border-zinc-700 px-3 py-1 rounded text-xs text-zinc-400">Jan. — Mars 2026</span>
@@ -164,7 +163,7 @@
                     <h4 class="font-semibold text-white">BTS SIO Option SLAM</h4>
                     <span class="text-xs text-zinc-500">2023 — 2025</span>
                   </div>
-                  <p class="text-zinc-500 text-sm">Lycée Amiral Bouvet · Saint-Benoit</p>
+                  <p class="text-zinc-500 text-sm">Lycée Nelson Mandela · Saint-Benoit</p>
                 </div>
               </div>
               <div class="relative">
@@ -184,7 +183,7 @@
                     <h4 class="font-semibold text-white">Brevet des Collèges</h4>
                     <span class="text-xs text-zinc-500">2016 — 2020</span>
                   </div>
-                  <p class="text-zinc-500 text-sm">Collège · Saint-Benoit</p>
+                  <p class="text-zinc-500 text-sm">Collège Amiral Bouvet · Saint-Benoit</p>
                 </div>
               </div>
             </div>
@@ -192,7 +191,7 @@
         </div>
 
         <div>
-          <h3 class="text-xs font-semibold mb-8 text-zinc-500 uppercase tracking-widest">Compétences 👨‍💻</h3>
+          <h3 class="text-xs font-semibold mb-8 text-zinc-500 uppercase tracking-widest">Compétences </h3>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
             <div v-for="skill in skills" :key="skill.name"
               class="border border-zinc-800 rounded-lg p-5 bg-black hover:border-zinc-600 transition-all duration-300">
@@ -206,7 +205,7 @@
             </div>
           </div>
 
-          <h3 class="text-xs font-semibold mb-8 text-zinc-500 uppercase tracking-widest">Outils ⚙️</h3>
+          <h3 class="text-xs font-semibold mb-8 text-zinc-500 uppercase tracking-widest">Outils </h3>
           <div class="grid md:grid-cols-3 gap-4">
             <div v-for="tool in tools" :key="tool.name"
               class="border border-zinc-800 rounded-lg p-5 bg-black hover:border-zinc-600 transition-all duration-300 text-center">
@@ -322,15 +321,26 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const isMenuOpen = ref(false);
 const scrolled = ref(false);
 
-const navItems = ['Accueil', 'À Propos', 'Parcours', 'Projets', 'Veille'];
+const navItems = [
+  { name: 'Accueil', id: 'accueil' },
+  { name: 'À Propos', id: 'a-propos' },
+  { name: 'Parcours', id: 'parcours' },
+  { name: 'Projets', id: 'projets' },
+  { name: 'Veille', id: 'veille' },
+];
 
 const menuItems = [
-  { name: 'Accueil', icon: '🏠', href: '#accueil' },
-  { name: 'À Propos', icon: '👤', href: '#a-propos' },
-  { name: 'Parcours', icon: '🎓', href: '#parcours' },
-  { name: 'Projets', icon: '🚀', href: '#projets' },
-  { name: 'Veille', icon: '📔', href: '#veille' },
+  { name: 'Accueil', icon: '🏠', id: 'accueil' },
+  { name: 'À Propos', icon: '👤', id: 'a-propos' },
+  { name: 'Parcours', icon: '🎓', id: 'parcours' },
+  { name: 'Projets', icon: '🚀', id: 'projets' },
+  { name: 'Veille', icon: '📔', id: 'veille' },
 ];
+
+const scrollTo = (id) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+};
 
 const projects = [
   {
